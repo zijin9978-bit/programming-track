@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0d10" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Programming Track</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">PROGRAMMING TRACK</div>
+        <h1 id="pageTitle">今日</h1>
+      </div>
+      <button class="icon-btn" id="themeBtn" aria-label="切换主题">◐</button>
+    </header>
+
+    <main>
+      <section class="page active" data-page="today">
+        <div class="hero">
+          <div>
+            <div class="hero-date" id="todayDate">—</div>
+            <h2 id="taskTitle">加载中</h2>
+            <p id="taskSummary">—</p>
+          </div>
+          <div class="duration-pill" id="durationPill">—</div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">累计完成</div>
+            <div class="stat-value" id="statDone">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">连续完成</div>
+            <div class="stat-value" id="statStreak">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">本周记录</div>
+            <div class="stat-value" id="statWeek">0</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-kicker">TODAY</div>
+          <h3>今天做什么</h3>
+          <p id="taskDetail">—</p>
+          <div class="divider"></div>
+          <div class="subtle-title">本周产出</div>
+          <p class="muted" id="weeklyOutput">—</p>
+        </div>
+
+        <div class="card">
+          <div class="card-kicker">SUBMIT</div>
+          <h3>提交今天</h3>
+
+          <div class="segmented" id="statusControl">
+            <button data-status="未开始">未开始</button>
+            <button data-status="部分完成">部分完成</button>
+            <button data-status="完成">完成</button>
+          </div>
+
+          <label class="field">
+            <span>实际学习时长</span>
+            <div class="input-row">
+              <input id="minutesInput" type="number" min="0" max="300" step="5" inputmode="numeric" />
+              <span class="unit">分钟</span>
+            </div>
+          </label>
+
+          <label class="field">
+            <span>掌握感</span>
+            <div class="mastery-row" id="masteryControl">
+              <button data-mastery="1">1</button>
+              <button data-mastery="2">2</button>
+              <button data-mastery="3">3</button>
+              <button data-mastery="4">4</button>
+              <button data-mastery="5">5</button>
+            </div>
+          </label>
+
+          <label class="field">
+            <span>学习记录</span>
+            <textarea id="notesInput" rows="4" placeholder="今天学了什么、哪里卡住、自己解决了什么。"></textarea>
+          </label>
+
+          <label class="field">
+            <span>代码 / 项目文件名（可选）</span>
+            <input id="artifactInput" type="text" placeholder="week02_average.py" />
+          </label>
+
+          <button class="primary-btn" id="saveBtn">保存今天</button>
+          <div class="saved-toast" id="savedToast">已保存</div>
+        </div>
+      </section>
+
+      <section class="page" data-page="calendar">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">TWO-YEAR MAP</div>
+            <h2>两年学习地图</h2>
+          </div>
+        </div>
+
+        <div class="legend">
+          <span><i class="dot done"></i>完成</span>
+          <span><i class="dot partial"></i>部分</span>
+          <span><i class="dot missed"></i>过去未完成</span>
+          <span><i class="dot future"></i>未来</span>
+        </div>
+
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </section>
+
+      <section class="page" data-page="plan">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">ROADMAP</div>
+            <h2>高二上 22 周</h2>
+          </div>
+        </div>
+        <div id="planList" class="plan-list"></div>
+
+        <div class="section-head second">
+          <div>
+            <div class="eyebrow">AFTER THAT</div>
+            <h2>后续阶段</h2>
+          </div>
+        </div>
+        <div id="phaseList" class="plan-list"></div>
+      </section>
+
+      <section class="page" data-page="data">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">LOCAL FIRST</div>
+            <h2>数据与设置</h2>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>数据只存在本机</h3>
+          <p class="muted">学习进度保存在浏览器 localStorage。换设备、清浏览器数据或卸载浏览器前，记得先导出。</p>
+          <button class="secondary-btn" id="exportBtn">导出学习记录</button>
+          <label class="secondary-btn file-btn">
+            导入学习记录
+            <input type="file" id="importInput" accept="application/json" hidden />
+          </label>
+        </div>
+
+        <div class="card">
+          <h3>安装到主屏幕</h3>
+          <p class="muted">部署到 HTTPS 网站后，可用浏览器“添加到主屏幕 / 安装应用”，体验会接近原生 App。</p>
+          <button class="secondary-btn" id="installBtn" disabled>安装应用</button>
+        </div>
+
+        <div class="card danger-card">
+          <h3>清空数据</h3>
+          <p class="muted">只清空本机学习记录，不会修改计划。</p>
+          <button class="danger-btn" id="resetBtn">清空学习记录</button>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-target="today"><span>◉</span><small>今日</small></button>
+      <button class="nav-item" data-target="calendar"><span>▦</span><small>日历</small></button>
+      <button class="nav-item" data-target="plan"><span>≡</span><small>计划</small></button>
+      <button class="nav-item" data-target="data"><span>···</span><small>数据</small></button>
+    </nav>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
