@@ -3,9 +3,11 @@
   "short_name": "Prog Track",
   "start_url": "./",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "scope": "./",
   "background_color": "#0b0d10",
   "theme_color": "#0b0d10",
-  "description": "高考优先的两年编程学习追踪器",
+  "description": "支持离线使用和跨设备云同步的两年编程学习追踪器",
   "icons": [
     {
       "src": "icon.svg",

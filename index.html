@@ -145,9 +145,56 @@
           </div>
         </div>
 
+        <div class="card sync-card">
+          <div class="sync-heading">
+            <div>
+              <div class="card-kicker">CLOUD SYNC</div>
+              <h3>跨设备同步</h3>
+            </div>
+            <span class="sync-badge" id="syncBadge">仅本机</span>
+          </div>
+          <p class="muted" id="syncMessage">先保存云端配置，再登录同一个账号。手机和电脑会自动合并最新记录。</p>
+
+          <details class="cloud-setup" id="cloudSetup">
+            <summary>首次配置云端</summary>
+            <label class="field">
+              <span>Supabase 项目网址</span>
+              <input id="cloudUrlInput" type="url" inputmode="url" autocomplete="url" placeholder="https://xxxx.supabase.co" />
+            </label>
+            <label class="field">
+              <span>Publishable key / anon key</span>
+              <input id="cloudKeyInput" type="password" autocomplete="off" placeholder="sb_publishable_..." />
+            </label>
+            <p class="field-help">这里只能填写公开客户端密钥。不要填写 secret key 或 service_role key。</p>
+            <button class="secondary-btn" id="saveCloudConfigBtn">保存云端配置</button>
+          </details>
+
+          <div id="authPanel" hidden>
+            <label class="field">
+              <span>邮箱</span>
+              <input id="cloudEmailInput" type="email" autocomplete="email" placeholder="name@example.com" />
+            </label>
+            <label class="field">
+              <span>密码</span>
+              <input id="cloudPasswordInput" type="password" minlength="6" autocomplete="current-password" placeholder="至少 6 位" />
+            </label>
+            <div class="button-row">
+              <button class="primary-btn" id="signInBtn">登录并同步</button>
+              <button class="secondary-btn" id="signUpBtn">注册账号</button>
+            </div>
+          </div>
+
+          <div id="syncPanel" hidden>
+            <p class="account-line">已登录：<strong id="cloudAccount">—</strong></p>
+            <p class="field-help" id="lastSyncText">尚未同步</p>
+            <button class="primary-btn" id="syncNowBtn">立即同步</button>
+            <button class="secondary-btn" id="signOutBtn">退出账号</button>
+          </div>
+        </div>
+
         <div class="card">
-          <h3>数据只存在本机</h3>
-          <p class="muted">学习进度保存在浏览器 localStorage。换设备、清浏览器数据或卸载浏览器前，记得先导出。</p>
+          <h3>本地备份</h3>
+          <p class="muted">学习进度始终先保存在本机。即使已开启云同步，也建议偶尔导出一份 JSON 备份。</p>
           <button class="secondary-btn" id="exportBtn">导出学习记录</button>
           <label class="secondary-btn file-btn">
             导入学习记录
@@ -156,8 +203,8 @@
         </div>
 
         <div class="card">
-          <h3>安装到主屏幕</h3>
-          <p class="muted">部署到 HTTPS 网站后，可用浏览器“添加到主屏幕 / 安装应用”，体验会接近原生 App。</p>
+          <h3>安装为本地 App</h3>
+          <p class="muted">手机用 Chrome / Safari 添加到主屏幕；电脑用 Chrome / Edge 的“安装应用”。安装后可独立窗口运行，并支持离线使用。</p>
           <button class="secondary-btn" id="installBtn" disabled>安装应用</button>
         </div>
 
@@ -178,5 +225,6 @@
   </div>
 
   <script src="app.js"></script>
+  <script src="cloud-sync.js"></script>
 </body>
 </html>

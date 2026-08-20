@@ -1,6 +1,6 @@
 # Programming Track Mobile
 
-手机优先版，两年编程学习追踪 PWA。
+手机和电脑通用的两年编程学习追踪 PWA。支持本地优先、离线使用和 Supabase 跨设备同步。
 
 ## 你会看到什么
 - 今日任务
@@ -13,6 +13,8 @@
 - 深色 / 浅色模式
 - 支持 PWA 安装到主屏幕
 - 支持离线缓存
+- 邮箱账号登录与跨设备云同步
+- 本地和云端记录按更新时间自动合并
 
 ## 最简单的本地预览
 
@@ -48,10 +50,24 @@ http://192.168.1.10:8000
 - Android Chrome：菜单 → 添加到主屏幕 / 安装应用
 - iPhone Safari：分享 → 添加到主屏幕
 
+## 安装到电脑
+
+用 Chrome 或 Edge 打开 HTTPS 网站，点击地址栏右侧的安装图标。安装后会像普通桌面 App 一样在独立窗口运行；无需额外打包 EXE。
+
+## 开启云端同步
+
+1. 创建一个 Supabase 项目。
+2. 打开项目的 SQL Editor，运行 `supabase-schema.sql`。
+3. 在 Supabase 的 API 设置中复制 Project URL 和 Publishable key（旧项目也可使用 anon key）。
+4. 打开 Programming Track 的“数据”页，在“首次配置云端”中粘贴并保存。
+5. 注册账号；如果项目开启了邮箱验证，先点击验证邮件，再回来登录。
+6. 在手机和电脑上登录同一个账号，即可自动同步。
+
+不要把 secret key 或 service_role key 填进网页。数据库已通过 Row Level Security 限制每个账号只能访问自己的记录。
+
 ## 数据
 
-进度保存在浏览器 `localStorage`，不会上传服务器。
-换手机、清理浏览器数据之前，先在“数据”页导出 JSON。
+进度始终先保存在浏览器 `localStorage`。未配置云端时不会上传；登录后会在联网时同步到 Supabase。换手机或清理浏览器数据之前，仍建议导出 JSON 备份。
 
 ## 计划
 

@@ -1,6 +1,6 @@
 
-const CACHE = "programming-track-v3-daily";
-const ASSETS = ["./","./index.html","./styles.css","./app.js","./manifest.webmanifest","./icon.svg"];
+const CACHE = "programming-track-v4-cloud";
+const ASSETS = ["./","./index.html","./styles.css","./app.js","./cloud-sync.js","./manifest.webmanifest","./icon.svg"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
   self.skipWaiting();
