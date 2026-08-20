@@ -30,6 +30,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
 body{min-height:100vh}
 button,input,textarea{font:inherit}
 button{cursor:pointer}
+[hidden]{display:none!important}
 .app-shell{max-width:760px;margin:0 auto;min-height:100vh;padding:env(safe-area-inset-top) 18px calc(92px + env(safe-area-inset-bottom))}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:22px 2px 12px;position:sticky;top:0;background:linear-gradient(var(--bg) 72%,transparent);z-index:10}
 .eyebrow{font-size:10px;letter-spacing:.18em;font-weight:700;color:var(--muted)}
@@ -119,6 +120,19 @@ input:focus,textarea:focus{border-color:rgba(127,127,127,.45)}
 .nav-item.active{color:var(--text)}
 
 .danger-card{margin-bottom:24px}
+
+.sync-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.sync-heading h3{margin-top:5px}
+.sync-badge{flex:0 0 auto;border-radius:999px;padding:7px 10px;background:var(--panel-2);border:1px solid var(--line);color:var(--muted);font-size:11px;font-weight:700}
+.sync-badge.online{color:#65c990;background:rgba(53,165,106,.12);border-color:rgba(53,165,106,.28)}
+.sync-badge.syncing{color:#e0b762;background:rgba(211,163,63,.12);border-color:rgba(211,163,63,.28)}
+.sync-badge.error{color:#db8d8d;background:rgba(169,83,83,.12);border-color:rgba(169,83,83,.28)}
+.cloud-setup{margin-top:17px;border-top:1px solid var(--line);padding-top:14px}
+.cloud-setup summary{cursor:pointer;color:var(--text);font-weight:700;font-size:13px}
+.field-help{font-size:11px;color:var(--muted);line-height:1.55;margin-top:-7px}
+.button-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.button-row .primary-btn,.button-row .secondary-btn{margin-top:0}
+.account-line{font-size:13px;margin:18px 0 12px}
 
 @media (min-width:660px){
   .calendar-grid{grid-template-columns:repeat(2,1fr)}

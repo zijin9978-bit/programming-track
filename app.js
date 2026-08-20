@@ -268,6 +268,11 @@ function loadProgress(){
 }
 function saveProgress(data){ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
 
+function refreshProgressUI(){
+  renderToday();
+  renderCalendar();
+}
+
 function taskFor(d){
   if(d < START) return {title:"尚未开学",duration:"0 分钟",task:"计划从 2026-08-24 开始。现在不用提前赶进度。",output:"保持高考主线即可"};
   if(d > END) return {title:"计划已结束",duration:"—",task:"高中阶段计划已经结束。",output:"进入大学阶段 AI 学习路线"};
@@ -373,6 +378,7 @@ function saveToday(){
     updatedAt:new Date().toISOString()
   };
   saveProgress(progress);
+  window.CloudSync?.scheduleSync();
   const toast=document.getElementById("savedToast");
   toast.classList.add("show");
   setTimeout(()=>toast.classList.remove("show"),1200);
@@ -484,7 +490,8 @@ function importData(file){
       const progress=data.progress || data;
       if(typeof progress!=="object") throw new Error();
       saveProgress(progress);
-      renderToday(); renderCalendar();
+      refreshProgressUI();
+      window.CloudSync?.scheduleSync();
       alert("导入成功");
     }catch{ alert("文件格式不正确"); }
   };
@@ -528,6 +535,13 @@ document.getElementById("installBtn").addEventListener("click",async()=>{
 if("serviceWorker" in navigator){
   window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
 }
+
+window.ProgrammingTrackStore={
+  load:loadProgress,
+  save:saveProgress,
+  refresh:refreshProgressUI,
+  storageKey:STORAGE_KEY
+};
 
 renderToday();
 renderCalendar();
